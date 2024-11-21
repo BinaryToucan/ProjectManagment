@@ -1,0 +1,66 @@
+﻿@page
+@using SimpleProjectManagement.Models.Enums
+@model ProjectManagment.Pages.Tasks.CreateModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>TaskTracker</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TaskTracker.Title" class="control-label"></label>
+                <input asp-for="TaskTracker.Title" class="form-control" />
+                <span asp-validation-for="TaskTracker.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaskTracker.Description" class="control-label"></label>
+                <input asp-for="TaskTracker.Description" class="form-control" />
+                <span asp-validation-for="TaskTracker.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaskTracker.CreateDate" class="control-label"></label>
+                <input asp-for="TaskTracker.CreateDate" class="form-control" />
+                <span asp-validation-for="TaskTracker.CreateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaskTracker.Priority" class="control-label"></label>
+                <select asp-for="TaskTracker.Priority" class="form-control"
+                    class="form-control"
+                    asp-items="Html.GetEnumSelectList<Priority>()">
+                    <option>Select priority ...</option>
+                </select>
+                <span asp-validation-for="TaskTracker.Priority" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaskTracker.Status" class="control-label"></label>
+                <select asp-for="TaskTracker.Status" class="form-control"
+                        class="form-control"
+                        asp-items="Html.GetEnumSelectList<StatusTask>()">
+                    <option>Select priority ...</option>
+                </select>
+                <span asp-validation-for="TaskTracker.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaskTracker.AssignId" class="control-label"></label>
+                <select asp-for="TaskTracker.AssignId" class ="form-control" asp-items="ViewBag.AssignId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
