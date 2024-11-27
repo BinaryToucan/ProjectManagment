@@ -4,6 +4,7 @@ This is a simple Task Manager web application built using ASP.NET Core, Razor Pa
 Features
 * Task Management: Users can create, edit, and delete tasks.
 * User Management: create, edit, and delete users.
-* Task Status: Tasks can be marked as completed or pending.
+* Task Status: Tasks can have one of 7 different statuses (e.g., ToDo, In Progress, Test, Hold, etc.).
+* Task Priority: Tasks can be assigned different priority levels (e.g., Low, Medium, High, etc.).
 * MySQL Database: All tasks are stored in a MySQL database.
 * Razor Pages: Uses Razor Pages for clean and efficient views.
