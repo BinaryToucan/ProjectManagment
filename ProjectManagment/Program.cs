@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using SimpleProjectManagement.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,9 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<ManagementDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SimpleProjectManagementContext") ?? throw new InvalidOperationException("Connection string 'SimpleProjectManagementContext' not found.")));
-
-
-builder.Services.AddControllers();
 
 var app = builder.Build();
 
