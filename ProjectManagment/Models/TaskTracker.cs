@@ -16,7 +16,8 @@ public class TaskTracker
     /// <summary>
     /// Название задачи
     /// </summary>
-    public string? Title { get; set; }
+    [Required]
+    public required string Title { get; set; }
 
     /// <summary>
     /// Описание задачи
