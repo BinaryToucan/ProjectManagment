@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SimpleProjectManagement.Data;
+using SimpleProjectManagement.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,13 @@ builder.Services.AddDbContext<ManagementDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SimpleProjectManagementContext") ?? throw new InvalidOperationException("Connection string 'SimpleProjectManagementContext' not found.")));
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedData.Initialize(services);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
