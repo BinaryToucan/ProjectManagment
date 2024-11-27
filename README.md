@@ -1,5 +1,5 @@
 ## Task Manager (DotNet + Razor Pages + MySQL)
-This is a simple Task Manager web application built using ASP.NET Core, Razor Pages, and MySQL. The application allows users to manage tasks, including creating, updating, deleting, and marking tasks as completed.
+This is a simple Task Manager web application built using ASP.NET Core, Razor Pages, and MySQL. The application allows users to manage tasks, including creating, updating, deleting.
 
 Features
 * Task Management: Users can create, edit, and delete tasks.
