@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using SimpleProjectManagement.Data;
@@ -10,18 +6,36 @@ using SimpleProjectManagement.Models;
 
 namespace ProjectManagment.Pages.Users
 {
+    /// <summary>
+    /// Модель страницы Delete (удаление юзера)
+    /// </summary>
     public class DeleteModel : PageModel
     {
-        private readonly SimpleProjectManagement.Data.ManagementDbContext _context;
+        /// <summary>
+        /// Контекст Бд
+        /// </summary>
+        private readonly ManagementDbContext _context;
 
-        public DeleteModel(SimpleProjectManagement.Data.ManagementDbContext context)
+        /// <summary>
+        /// Конструктор 
+        /// </summary>
+        /// <param name="context"> контекст бд </param>
+        public DeleteModel(ManagementDbContext context)
         {
             _context = context;
         }
 
+        /// <summary>
+        /// Юзер
+        /// </summary>
         [BindProperty]
         public User User { get; set; } = default!;
 
+        /// <summary>
+        /// Метод инициализации
+        /// </summary>
+        /// <param name="id">id юзера</param>
+        /// <returns></returns>
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -42,6 +56,10 @@ namespace ProjectManagment.Pages.Users
             return Page();
         }
 
+        /// <summary>
+        /// Удаление юзера
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (id == null)

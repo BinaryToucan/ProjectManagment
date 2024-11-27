@@ -1,28 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SimpleProjectManagement.Data;
 using SimpleProjectManagement.Models;
 
 namespace ProjectManagment.Pages.Users
 {
+    /// <summary>
+    /// Модель страницы Edit (редактирование юзера)
+    /// </summary>
     public class EditModel : PageModel
     {
-        private readonly SimpleProjectManagement.Data.ManagementDbContext _context;
+        /// <summary>
+        /// Контекст Бд
+        /// </summary>
+        private readonly ManagementDbContext _context;
 
-        public EditModel(SimpleProjectManagement.Data.ManagementDbContext context)
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="context"> контекст БД</param>
+        public EditModel(ManagementDbContext context)
         {
             _context = context;
         }
 
+        /// <summary>
+        /// Юзер
+        /// </summary>
         [BindProperty]
         public User User { get; set; } = default!;
 
+        /// <summary>
+        /// Метод инициализации
+        /// </summary>
+        /// <param name="id">id юзера</param>
+        /// <returns></returns>
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -39,8 +52,10 @@ namespace ProjectManagment.Pages.Users
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
+        /// <summary>
+        /// Обновление юзера
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -69,6 +84,11 @@ namespace ProjectManagment.Pages.Users
             return RedirectToPage("./Index");
         }
 
+        /// <summary>
+        /// Существует ли юзер?
+        /// </summary>
+        /// <param name="id">id юзера</param>
+        /// <returns> Есть ли такой юзер </returns>
         private bool UserExists(int id)
         {
             return _context.Users.Any(e => e.Id == id);
