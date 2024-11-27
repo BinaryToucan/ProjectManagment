@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,18 +7,36 @@ using SimpleProjectManagement.Models;
 
 namespace ProjectManagment.Pages.Tasks
 {
+    /// <summary>
+    /// Модель страницы Edit (редактирование задачи)
+    /// </summary>
     public class EditModel : PageModel
     {
-        private readonly SimpleProjectManagement.Data.ManagementDbContext _context;
+        /// <summary>
+        /// Контекст Бд
+        /// </summary>
+        private readonly ManagementDbContext _context;
 
-        public EditModel(SimpleProjectManagement.Data.ManagementDbContext context)
+        /// <summary>
+        /// Конструктор 
+        /// </summary>
+        /// <param name="context"> контекст бд </param>
+        public EditModel(ManagementDbContext context)
         {
             _context = context;
         }
 
+        /// <summary>
+        /// Задача
+        /// </summary>
         [BindProperty]
         public TaskTracker TaskTracker { get; set; } = default!;
 
+        /// <summary>
+        /// Метод инициализации
+        /// </summary>
+        /// <param name="id">id задачи</param>
+        /// <returns></returns>
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -40,8 +54,10 @@ namespace ProjectManagment.Pages.Tasks
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
+        /// <summary>
+        /// Обновление задачи
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -70,6 +86,11 @@ namespace ProjectManagment.Pages.Tasks
             return RedirectToPage("./Index");
         }
 
+        /// <summary>
+        /// Существует ли задача
+        /// </summary>
+        /// <param name="id">id задачи</param>
+        /// <returns> Существует ли задача </returns>
         private bool TaskTrackerExists(int id)
         {
             return _context.Tasks.Any(e => e.Id == id);

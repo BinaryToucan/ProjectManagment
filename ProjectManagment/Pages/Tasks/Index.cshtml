@@ -5,7 +5,20 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
+
+<form>
+    <p>
+        <select asp-for="TaskStatus" asp-items="Model.Statues">
+            <option value="">All</option>
+        </select>
+        <select asp-for="TaskPriority" asp-items="Model.Priorities">
+            <option value="">All</option>
+        </select>
+        <label>Title: <input type="text" asp-for="SearchString" /></label>
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -14,28 +27,28 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TaskTracker[0].Title)
+                @Html.DisplayNameFor(model => model.Tasks[0].Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TaskTracker[0].Description)
+                @Html.DisplayNameFor(model => model.Tasks[0].Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TaskTracker[0].CreateDate)
+                @Html.DisplayNameFor(model => model.Tasks[0].CreateDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TaskTracker[0].Priority)
+                @Html.DisplayNameFor(model => model.Tasks[0].Priority)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TaskTracker[0].Status)
+                @Html.DisplayNameFor(model => model.Tasks[0].Status)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TaskTracker[0].Assign)
+                @Html.DisplayNameFor(model => model.Tasks[0].Assign)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.TaskTracker) {
+@foreach (var item in Model.Tasks) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
@@ -53,7 +66,15 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Assign.Id)
+                    @if(item.Assign != null)
+                    {
+                        <a asp-page="/Users/Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Assign.Name)</a>
+                    }
+                    else
+                    {
+                        <p>No Assign</p>
+                    }
+
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

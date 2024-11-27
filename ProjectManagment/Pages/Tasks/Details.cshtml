@@ -5,7 +5,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>@ViewData["Title"]</h1>
 
 <div>
     <h4>TaskTracker</h4>
@@ -45,7 +45,14 @@
             @Html.DisplayNameFor(model => model.TaskTracker.Assign)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TaskTracker.Assign.Id)
+            @if(Model.TaskTracker.AssignId != null){
+                @Html.DisplayFor(model => model.TaskTracker.Assign.Name)
+            }
+            else
+            {
+                <p>No Assign</p>
+            }
+            
         </dd>
     </dl>
 </div>
